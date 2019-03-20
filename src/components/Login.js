@@ -1,70 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
-//import Login from './components/Login';
-import firebase from './firebase'
-//import Home from './components/Home';
+import React, { Component }  from 'react';
 
-class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      hoursWorked: "",
-      username: "",
-      items: []
-    };
-    
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const itemsRef = firebase.database().ref('items');
-    const item = {
-      title: this.state.hoursWorked,
-      user: this.state.username
-    }
-    itemsRef.push(item);
-    this.setState({
-      hoursWorked: '',
-      username: ''
-    });
-  }
-
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('items');
-    itemsRef.on('value', (snapshot) => {
-      let items = snapshot.val();
-      let newState = [];
-      for (let item in items) {
-        newState.push({
-          id: item,
-          title: items[item].title,
-          user: items[item].user
-        });
-      }
-      this.setState({
-        items: newState
-      });
-    });
-  }
-
-  removeItem = (itemId) => {
-    const itemRef = firebase.database().ref(`/items/${itemId}`);
-    itemRef.remove();
-  }
-  render() {
-
-    console.log(this.state)
-    return (
-      <form>            
+class Login extends Component {
+    render() { 
+        return (
+            <form>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+    <label class="form-check-label" for="exampleCheck1">Create New User</label>
+  </div>            
   <div class="form-group">
-    <label for="exampleInputEmail1">Login</label>
+    <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
@@ -93,8 +38,7 @@ class App extends Component {
   </div>
   <button type="submit" class="btn btn-primary mb-2">Create New User</button> */}
 </form>
-    );
-  }
-}
- 
- export default App;
+        )}
+    }
+
+export default Login    
