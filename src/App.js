@@ -3,18 +3,17 @@ import './App.css';
 //import Login from './components/Login';
 import firebase from './firebase'
 //import Home from './components/Home';
+import Form from './components/Form'
 
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
+  
+      state = {
       hoursWorked: "",
       username: "",
       items: []
     };
-    
-  }
+
 
   handleChange = (e) => {
     this.setState({
@@ -62,7 +61,8 @@ class App extends Component {
 
     console.log(this.state)
     return (
-      <form>            
+<div>
+<form>            
   <div class="form-group">
     <label for="exampleInputEmail1">Login</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
@@ -75,6 +75,11 @@ class App extends Component {
   <button type="submit" class="btn btn-primary mb-2">User Login</button>
   <br></br><br></br><br></br><br></br>
 </form>
+<Form />
+</div>
+
+
+
     );
   }
 }
