@@ -11,7 +11,7 @@ class App extends Component {
       state = {
       hoursWorked: "",
       username: "",
-      items: []
+      users: []
     };
 
 
@@ -36,22 +36,33 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('items');
-    itemsRef.on('value', (snapshot) => {
-      let items = snapshot.val();
-      let newState = [];
-      for (let item in items) {
-        newState.push({
-          id: item,
-          title: items[item].title,
-          user: items[item].user
-        });
-      }
-      this.setState({
-        items: newState
-      });
-    });
+    return fetch("http://localhost4000/")
+    .then(results => {
+      return results.json();
+    })
+    .then(data => {
+      this.setState({ users: data })
+    })
   }
+
+
+  //      FIREBASE CONNECTION
+  //   const itemsRef = firebase.database().ref('items');
+  //   itemsRef.on('value', (snapshot) => {
+  //     let items = snapshot.val();
+  //     let newState = [];
+  //     for (let item in items) {
+  //       newState.push({
+  //         id: item,
+  //         title: items[item].title,
+  //         user: items[item].user
+  //       });
+  //     }
+  //     this.setState({
+  //       items: newState
+  //     });
+  //   });
+  // }
 
   removeItem = (itemId) => {
     const itemRef = firebase.database().ref(`/items/${itemId}`);
@@ -77,7 +88,6 @@ class App extends Component {
   <button type="submit" class="btn btn-primary mb-2">User Login</button>
   <br></br><br></br><br></br><br></br>
 </form>
-<Form />
 </div>
     );
   }

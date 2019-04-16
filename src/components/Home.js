@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Form from './Form';
 
 class Home extends Component {
     render () {
@@ -23,6 +24,7 @@ class Home extends Component {
                 <span class="navbar-text">
                 General Atomics
                 </span>
+                <Form/>
             </div>
             </nav>
         )
